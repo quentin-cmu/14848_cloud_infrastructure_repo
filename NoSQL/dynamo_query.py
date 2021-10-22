@@ -70,12 +70,12 @@ print(table.item_count)
 # Reading the CSV file, uploading the blobs and creating the table
 import csv
 
-with open('./path-to-a-file/experiments.csv', 'r') as csvfile:
+with open('experiments.csv', 'r') as csvfile:
     csvf = csv.reader(csvfile, delimiter=',', quotechar='|')
     headers = next(csvf)  # Skip the header in the first line
     for item in csvf:
         print(item)
-        body = open('./path-to-a-file/' + item[4], 'rb')
+        body = open('./' + item[4], 'rb')
         s3.Object('cloud-infra-cmu', item[4]).put(Body=body)
         md = s3.Object('cloud-infra-cmu', item[4]).Acl().put(ACL='public-read')
 
